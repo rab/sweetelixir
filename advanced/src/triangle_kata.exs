@@ -28,9 +28,11 @@ defmodule ClassifyShapes do
     slow(result, 1000)
   end
 
-  def classify( {a,b,c} ) when a == b and b == c, do: :equilateral
-  def classify( {a,b,c} ) when a == b or b == c or a == c, do: slow(:isosceles, 1100)
-  def classify( {a,b,c} ) when a != b and b != c, do: slow(:scalene)
+  def classify( {a,a,a} ), do: :equilateral
+  def classify( {a,a,c} ), do: slow(:isosceles, 1100)
+  def classify( {a,b,b} ), do: slow(:isosceles, 1100)
+  def classify( {a,b,a} ), do: slow(:isosceles, 1100)
+  def classify( {a,b,c} ), do: slow(:scalene)
 
   def classify( [h|t] ), do: [classify(h) | classify(t)]
   def classify( [] ) do
